@@ -1,17 +1,20 @@
-import React from 'react';
-import { ProductItemT } from '../types';
-import { useCartStateStore, CartOperationT } from '../store/cart-store';
+import React from "react";
+import { CartItemT, ProductItemT } from "../types";
+import { CartOperationT } from "../types";
+
 type ProductItemProps = {
+  items: CartItemT[];
   item: ProductItemT;
+  removeItemFromCart: (id: string) => void;
+  addItemToCart: (item: CartItemT) => void;
+  updateItemCount: (item: CartItemT, operation: string) => void;
 };
 
-export const ProductItem = ({ item }: ProductItemProps) => {
-  const { cart, addItemToCart, updateItemCount, removeItemFromCart } =
-    useCartStateStore();
+export const ProductItem = ({ items, item, removeItemFromCart, addItemToCart, updateItemCount }: ProductItemProps) => {
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
-    const productCount = cart.filter((cartItem) => cartItem.id === item.id)[0]
+    const productCount = items.filter((cartItem) => cartItem.id === item.id)[0]
       ?.count;
 
     if (productCount) {
@@ -19,7 +22,7 @@ export const ProductItem = ({ item }: ProductItemProps) => {
     } else {
       setCount(0);
     }
-  }, [cart, item.id]);
+  }, [items, item.id]);
 
   const product = {
     id: item.id,
@@ -31,10 +34,10 @@ export const ProductItem = ({ item }: ProductItemProps) => {
   };
 
   return (
-    <div className="bg-slate-100 rounded-md grid  grid-cols-[30%_50%_20%] gap-2 overflow-hidden">
+    <li className="bg-slate-100 rounded-md grid  grid-cols-[30%_50%_20%] gap-2 overflow-hidden">
       <div>
         <div className="p-4">
-          <p className="text-lg font-bold">{item.name}</p>
+          <p data-testid="product-item-name" className="text-lg font-bold">{item.name}</p>
           <p className="text-sm">by {item.author}</p>
           <p>£{item.price.toFixed(2)}</p>
         </div>
@@ -54,8 +57,8 @@ export const ProductItem = ({ item }: ProductItemProps) => {
           }}
         >
           -
-        </button>{' '}
-        <span>{count}</span>{' '}
+        </button>{" "}
+        <span>{count}</span>{" "}
         <button
           className="bg-slate-400 text-white p-2 rounded-md"
           onClick={() => {
@@ -71,6 +74,6 @@ export const ProductItem = ({ item }: ProductItemProps) => {
           +
         </button>
       </div>
-    </div>
+    </li>
   );
 };

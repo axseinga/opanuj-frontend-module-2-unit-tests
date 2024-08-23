@@ -1,11 +1,14 @@
-import { useCartStateStore } from '../store/cart-store';
+import { CartItemT } from "../store/cart-store";
 
-export const Cart = () => {
-  const { cart, removeItemFromCart } = useCartStateStore();
+type CartProps = {
+  items: CartItemT[];
+  removeItemFromCart: (id: string) => void;
+};
 
+export const Cart = ({ items, removeItemFromCart }: CartProps) => {
   const calcSubtotalPrice = () => {
     let total = 0;
-    cart.forEach((product) => {
+    items.forEach((product) => {
       const totalItemsPrice = product.count * product.price;
       total += totalItemsPrice;
     });
@@ -15,11 +18,11 @@ export const Cart = () => {
   return (
     <div className="mx-auto mt-10 rounded-xl bg-white p-4 w-[30rem] h-min">
       <h2 className="mb-4 text-2xl font-bold text-customRed">
-        Your Cart ({cart.length})
+        Your Cart ({items.length})
       </h2>
       <div className="flex flex-col gap-7">
         <ul className="flex flex-col gap-2 divide-y-2 divide-gray-100 border-b-2 border-gray-100">
-          {cart.map((item, index) => (
+          {items.map((item, index) => (
             <li
               key={`${index}_${item.id}`}
               className="flex justify-between items-center"
@@ -49,7 +52,10 @@ export const Cart = () => {
         </ul>
         <div className="flex items-center justify-between">
           <p>Order Total</p>
-          <p className="text-2xl font-bold text-black">
+          <p
+            data-testid="order-total"
+            className="text-2xl font-bold text-black"
+          >
             ${calcSubtotalPrice().toFixed(2)}
           </p>
         </div>

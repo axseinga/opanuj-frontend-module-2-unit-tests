@@ -1,13 +1,8 @@
-import { Cart } from "./components/cart";
-import { ProductsList } from "./components/product-list";
+import { BookShop } from "./containers/book-shop";
+import { data } from "./data";
 
 const App = () => {
-  return (
-    <div className="grid gap-6 grid-cols-2 bg-slate-400 h-full p-8">
-      <ProductsList title="Books" />
-      <Cart />
-    </div>
-  );
+  return <BookShop data={data}/>;
 };
 
 export default App;
