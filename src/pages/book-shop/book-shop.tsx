@@ -1,7 +1,7 @@
-import { Cart } from "../components/cart";
-import { ProductsList } from "../components/product-list";
+import { Cart } from "../../components/cart";
+import { ProductsList } from "../../components/product-list";
 import { useState } from "react";
-import { CartItemT, CartOperationT, ProductItemT } from "../types";
+import { CartItemT, CartOperationT, ProductItemT } from "../../types";
 
 type BookShopProps = {
   data: ProductItemT[];

@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/vitest";
 import { test, expect, afterEach } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BookShop } from "./book-shop";
+import { BookShop } from "../pages/book-shop/book-shop";
 import { data } from "../data";
 
 afterEach(cleanup);

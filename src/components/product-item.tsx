@@ -1,6 +1,7 @@
 import React from "react";
 import { CartItemT, ProductItemT } from "../types";
 import { CartOperationT } from "../types";
+import { Link } from "react-router-dom";
 
 type ProductItemProps = {
   items: CartItemT[];
@@ -10,7 +11,13 @@ type ProductItemProps = {
   updateItemCount: (item: CartItemT, operation: string) => void;
 };
 
-export const ProductItem = ({ items, item, removeItemFromCart, addItemToCart, updateItemCount }: ProductItemProps) => {
+export const ProductItem = ({
+  items,
+  item,
+  removeItemFromCart,
+  addItemToCart,
+  updateItemCount,
+}: ProductItemProps) => {
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
@@ -37,12 +44,19 @@ export const ProductItem = ({ items, item, removeItemFromCart, addItemToCart, up
     <li className="bg-slate-100 rounded-md grid  grid-cols-[30%_50%_20%] gap-2 overflow-hidden">
       <div>
         <div className="p-4">
-          <p data-testid="product-item-name" className="text-lg font-bold">{item.name}</p>
+          <p data-testid="product-item-name" className="text-lg font-bold">
+            {item.name}
+          </p>
           <p className="text-sm">by {item.author}</p>
           <p>£{item.price.toFixed(2)}</p>
         </div>
       </div>
-      <p className="p-4">{item.description}</p>
+      <div className="p-4">
+        <p>{item.description}</p>
+        <p>
+          <Link to={`/info/${item.id}`} className="underline">More info about {item.name}</Link>
+        </p>
+      </div>
       <div className="bg-slate-500 p-4 flex items-center justify-center gap-5 text-white">
         <button
           className="bg-slate-400 text-white p-2 rounded-md"
