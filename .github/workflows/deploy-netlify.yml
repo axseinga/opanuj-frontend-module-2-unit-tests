@@ -1,7 +1,10 @@
-name: deploy
+name: deploy to netlify
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   app-setup:
@@ -25,7 +28,7 @@ jobs:
         uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: './dist'
-          production-branch: main
+          production-branch: master
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
         env:
