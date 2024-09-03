@@ -67,7 +67,7 @@ export const BookShop = ({ data }: BookShopProps) => {
         removeItemFromCart={removeItemFromCart}
       />
       <Cart items={cartItems} removeItemFromCart={removeItemFromCart} />
-      <p>v6</p>
+      <p>v7</p>
     </div>
   );
 };
