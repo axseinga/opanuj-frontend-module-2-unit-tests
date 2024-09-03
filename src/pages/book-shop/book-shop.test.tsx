@@ -2,10 +2,11 @@
 
 import "@testing-library/jest-dom/vitest";
 import { test, expect, afterEach } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BookShop } from "../../pages/book-shop/book-shop";
 import { data } from "../../data";
+import { render } from '../../utils/test-utils'; 
 
 afterEach(cleanup);
 
