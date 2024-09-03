@@ -24,8 +24,6 @@ jobs:
 
       - name: Build app
         run: npm run build
-        env:
-          VITE_ENVIRONMENT: STG
 
       - name: Deploy app to Vercel production env
         uses: ./.github/actions/deploy-vercel
@@ -35,3 +33,4 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VITE_ENVIRONMENT: STG
