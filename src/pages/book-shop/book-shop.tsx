@@ -9,6 +9,7 @@ type BookShopProps = {
 
 export const BookShop = ({ data }: BookShopProps) => {
   const [cartItems, setCartItems] = useState<CartItemT[]>([]);
+  const appVersion = __APP_VERSION__ ?? "";
 
   const addItemToCart = (item: CartItemT) => {
     const existingItem = cartItems.find(
@@ -67,7 +68,12 @@ export const BookShop = ({ data }: BookShopProps) => {
         removeItemFromCart={removeItemFromCart}
       />
       <Cart items={cartItems} removeItemFromCart={removeItemFromCart} />
-      <p>v7</p>
+      {import.meta.env.VITE_ENVIRONMENT !== "PROD" && (
+        <div>
+          <p>env: {import.meta.env.VITE_ENVIRONMENT}</p>
+          <p>v: {appVersion}</p>
+        </div>
+      )}
     </div>
   );
 };
