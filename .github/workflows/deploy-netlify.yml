@@ -2,9 +2,11 @@ name: deploy to netlify
 
 on:
   workflow_dispatch:
-
-permissions:
-  contents: write
+    inputs:
+      deploy-netlify:
+        type: boolean
+        description: Enable Netlify deployment
+        default: true
 
 jobs:
   app-setup:
@@ -26,6 +28,7 @@ jobs:
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
+        if: ${{ inputs.deploy-netlify }}
         with:
           publish-dir: './dist'
           production-branch: main
