@@ -1,19 +1,25 @@
-name: deploy to vercel
+name: Deploy to Netlify and Vercel
 
 on:
   workflow_dispatch:
     inputs:
+      deploy-netlify:
+        type: boolean
+        description: Enable Netlify deployment
+        default: true
       deploy-vercel:
         type: boolean
         description: Enable Vercel deployment
         default: true
 
 jobs:
-  Deploy-Production:
+  deploy:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,6 +37,19 @@ jobs:
 
       - name: Build app
         run: npm run build
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        if: ${{ inputs.deploy-netlify }}
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.PAT_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          production-deploy: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Install Vercel CLI
         if: ${{ inputs.deploy-vercel }}
