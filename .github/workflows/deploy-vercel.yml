@@ -23,6 +23,7 @@ jobs:
         run: npm run test
 
       - name: Build app
+        run: npm run build
         env:
           VITE_ENVIRONMENT: STG
 
