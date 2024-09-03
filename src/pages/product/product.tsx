@@ -12,7 +12,7 @@ export const ProductPage = () => {
   if (!item) return <></>;
 
   return (
-    <div className="gap-6 bg-slate-400 h-screen p-8">
+    <main className="gap-6 bg-slate-400 h-screen p-8">
       <Link to="/" className="p-4 underline">Back to main page</Link>
       <div className="p-4">
         <p data-testid="product-item-name" className="text-lg font-bold">
@@ -22,6 +22,6 @@ export const ProductPage = () => {
         <p>£{item.price.toFixed(2)}</p>
       </div>
       <p className="p-4">{item.description}</p>
-    </div>
+    </main>
   );
 };
