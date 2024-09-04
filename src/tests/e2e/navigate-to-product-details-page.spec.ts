@@ -6,7 +6,7 @@ test("navigate to first product details page", async ({ page }) => {
 
   const productList = page.getByRole("list");
   const firstResult = productList.locator("li").first();
-  const firstProductLink = firstResult.locator("a");
+  const firstProductLink = firstResult.locator("a").first();;
 
   await firstProductLink.click();
 
