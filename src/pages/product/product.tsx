@@ -13,6 +13,7 @@ export const ProductPage = () => {
 
   return (
     <main className="gap-6 bg-slate-400 h-screen p-8">
+      <p>test</p>
       <Link to="/" className="p-4 underline">Back to main page</Link>
       <div className="p-4">
         <p data-testid="product-item-name" className="text-lg font-bold">
