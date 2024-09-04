@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { PAGES } from "../utils/consts";
 
+test.afterEach(async ({ page }) => {
+  page.goto(PAGES.HOMEPAGE);
+});
+
 test("navigate to first product details page", async ({ page }) => {
   page.goto(PAGES.HOMEPAGE);
 
