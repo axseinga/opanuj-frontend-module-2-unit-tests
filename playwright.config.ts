@@ -12,6 +12,10 @@ export default defineConfig({
   use: {
     baseURL: process.env.E2E_TESTS_BASE_URL || 'http://localhost:5173',
     trace: 'on',
+    extraHTTPHeaders: {
+			"x-vercel-protection-bypass":
+				process.env.VERCEL_AUTOMATION_BYPASS_SECRET!,
+		},
   },
   outputDir: `src/tests/playwright/test-results`,
 });
