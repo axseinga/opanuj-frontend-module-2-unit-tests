@@ -1,9 +1,18 @@
-import { configDefaults, defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from "vitest/config";
+import { mergeConfig } from "vite";
 
-const PLAYWRIGHT_TESTS = ['**/*.spec.ts'];
+const PLAYWRIGHT_TESTS = ["**/tests/e2e/**/*.spec.ts"];
 
-export default defineConfig({
-  test: {
-    exclude: [...configDefaults.exclude, ...PLAYWRIGHT_TESTS],
-  },
-});
+import viteConfig from "./vite.config";
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      globals: true,
+      environment: "jsdom",
+      setupFiles: "./setupTests.ts",
+      exclude: [...configDefaults.exclude, ...PLAYWRIGHT_TESTS],
+    },
+  })
+);
