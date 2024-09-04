@@ -10,7 +10,7 @@ export default defineConfig({
     ['html', { outputFolder: `src/tests/playwright/html-report` }],
   ],
   use: {
-    baseURL: process.env.CI ? process.env.E2E_TESTS_BASE_URL : 'http://localhost:5173',
+    baseURL: process.env.E2E_TESTS_BASE_URL || 'http://localhost:5173',
     trace: 'on',
   },
   outputDir: `src/tests/playwright/test-results`,
