@@ -16,6 +16,6 @@ jobs:
     secrets: inherit
   
   deploy-aws:
-  needs: deploy-aws
-  uses: ./.github/workflows/deploy-aws.yml
-  secrets: inherit
+    needs: deploy-aws
+    uses: ./.github/workflows/deploy-aws.yml
+    secrets: inherit
