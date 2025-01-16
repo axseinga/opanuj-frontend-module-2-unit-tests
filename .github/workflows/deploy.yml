@@ -16,6 +16,6 @@ jobs:
     secrets: inherit
   
   deploy-aws:
-    needs: deploy-aws
+    needs: deploy-vercel
     uses: ./.github/workflows/deploy-aws.yml
     secrets: inherit
